@@ -23,11 +23,10 @@ name, which at a minimum has:
 * source file(s)
 * test file(s)
 * runtests.sh
-* Makefile
 
-This allows a language-agnostic way to compile (if needed) and run
-tests. The language-agnostic mechanism may simply delegate to a
-language-specific facility.
+This allows a language-agnostic way to run tests, which will compile
+the necessary files if need be. The language-agnostic mechanism may
+simply delegate to a language-specific facility.
 
 Ideally, tests are written indifferent to the implementation
 language. The tests can then be translated to each implementation

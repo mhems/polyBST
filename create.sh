@@ -3,12 +3,12 @@
 function create() {
     lang=$1
     if [ -d $lang ]; then
-        pushd .
-        cd $lang
+        pushd . &> /dev/null
+        cd $lang &> /dev/null
         touch runtests.sh Makefile
         chmod +x runtests.sh
         echo "populated $lang"
-        popd
+        popd &> /dev/null
     fi
 }
 
