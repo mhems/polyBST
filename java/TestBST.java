@@ -1,7 +1,9 @@
 package BST;
 
-import java.util.Comparator;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TestBST {
     public static boolean verify(Object expected, Object actual) {
@@ -20,16 +22,26 @@ public class TestBST {
     }
 
     public static void main(String[] args) {
-        BST<Integer> b = new BST<>(Comparator.comparingInt(i -> i));
+        Comparator<Integer> comp = Comparator.comparingInt(i -> i);
+        BST<Integer> b = new BST<>(comp);
+        List<Integer> exp = new ArrayList<>();
         verify(0, b.size());
+        verify(Arrays.asList(), b.list());
         b.add(5);
+        exp.add(5);
+        verify(true, b.contains(5));
         verify(1, b.size());
-        verify(Arrays.asList(5), b.list());
+        verify(exp, b.list());
         for (int i = 10; i >= 0; --i) {
-            b.add(new Integer(i));
+            Integer I = new Integer(i);
+            b.add(I);
+            if (!exp.contains(I)) {
+                exp.add(I);
+            }
         }
         verify(11, b.size());
-        verify(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), b.list());
+        exp.sort(comp);
+        verify(exp, b.list());
         for (int i = 0; i < 11; ++i) {
             verify(true, b.contains(new Integer(i)));
         }

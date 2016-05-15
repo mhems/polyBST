@@ -49,9 +49,9 @@ public class BST<T> {
             node = elem;
             return true;
         }
-        int result = comparator.compare(node, elem);
+        int result = comparator.compare(elem, node);
         if (result != 0) {
-            if (result > 0) {
+            if (result < 0) {
                 if (left == null) {
                     left = new BST<>(comparator);
                 }
@@ -76,10 +76,10 @@ public class BST<T> {
         if (node == null) {
             return false;
         }
-        int result = comparator.compare(node, elem);
+        int result = comparator.compare(elem, node);
         if (result == 0) {
             return true;
-        } else if (result > 0) {
+        } else if (result < 0) {
             return left != null && left.contains(elem);
         } else {
             return right != null && right.contains(elem);
@@ -95,7 +95,9 @@ public class BST<T> {
         if (left != null) {
             list.addAll(left.list());
         }
-        list.add(node);
+        if (node != null) {
+            list.add(node);
+        }
         if (right != null) {
             list.addAll(right.list());
         }
