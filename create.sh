@@ -5,8 +5,8 @@ function create() {
     if [ -d $lang ]; then
         pushd .
         cd $lang
-        mkdir src tests
         touch runtests.sh Makefile
+        chmod +x runtests.sh
         echo "populated $lang"
         popd
     fi

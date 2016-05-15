@@ -20,8 +20,8 @@ Future additions to the API:
 
 Each language's implementation is in a directory with the language's
 name, which at a minimum has:
-* src/
-* tests/
+* source file(s)
+* test file(s)
 * runtests.sh
 * Makefile
 
