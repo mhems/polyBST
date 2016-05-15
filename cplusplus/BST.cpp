@@ -1,8 +1,12 @@
+#include <iostream>
+
 #include "BST.hpp"
 
-namespace BST {
     using std::vector;
+    using std::cout;
+    using std::endl;
 
+namespace BST {
     template <typename T, typename C>
     std::size_t BST<T, C>::size() const {
         int sum = 0;
@@ -15,18 +19,18 @@ namespace BST {
                 sum += right->size();
             }
         }
-        return 0;
+        return sum;
     }
 
     template <typename T, typename C>
     bool BST<T, C>::add(T elem) {
+        C comp;
         if (root == nullptr) {
-            root = new Node(elem);
+            this->root = new Node(elem);
             return true;
         }
-        int result = C(root.val, elem);
-        if (result != 0) {
-            if (result < 0) {
+        if (root->value != elem) {
+            if (comp(elem, root->value)) {
                 if (left == nullptr) {
                     left = new BST<T, C>();
                 }
@@ -44,13 +48,13 @@ namespace BST {
 
     template <typename T, typename C>
     bool BST<T, C>::contains(T elem) const {
+        C comp;
         if (root == nullptr) {
             return false;
         }
-        int result = C(root.val, elem);
-        if (result == 0) {
+        if (root->value == elem) {
             return true;
-        } else if (result < 0) {
+        } else if (comp(elem, root->value)) {
             return left != nullptr && left->contains(elem);
         } else {
             return right != nullptr && right->contains(elem);
@@ -62,12 +66,14 @@ namespace BST {
         vector<T> list;
         if (left != nullptr) {
             vector<T> ret = left->list();
-            list.insert(list.cend(), ret.cbegin(), ret.cend());
+            list.insert(list.end(), ret.cbegin(), ret.cend());
         }
-        list.push_back(root);
+        if (root != nullptr) {
+            list.push_back(root->value);
+        }
         if (right != nullptr) {
             vector<T> ret = right->list();
-            list.insert(list.cend(), ret.cbegin(), ret.cend());
+            list.insert(list.end(), ret.cbegin(), ret.cend());
         }
         return list;
     }
@@ -78,4 +84,6 @@ namespace BST {
         delete left;
         delete right;
     }
+
+    template class BST<int>;
 }

@@ -5,11 +5,14 @@
 #include <vector>
 
 namespace BST {
+
     template <typename T, typename Compare=std::less<T>>
     class BST {
         struct Node {
             T value;
             Node() = delete;
+            Node(const Node&) = delete;
+            Node& operator=(const Node&) = delete;
             explicit Node(T val) : value(val) { }
         };
 
@@ -28,6 +31,7 @@ namespace BST {
         std::vector<T> list() const;
         ~BST();
     };
+
 }
 
 #endif /* BST_H */
