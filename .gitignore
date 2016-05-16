@@ -1,3 +1,4 @@
 *.o
 *.class
 test
+__pycache__
