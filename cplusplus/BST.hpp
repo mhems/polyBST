@@ -26,8 +26,8 @@ namespace BST {
         BST& operator=(const BST&) = delete;
         BST& operator=(BST&&) = delete;
         std::size_t size() const;
-        bool add(T elem);
-        bool contains(T elem) const;
+        bool add(const T elem);
+        bool contains(const T elem) const;
         std::vector<T> list() const;
         ~BST();
     };

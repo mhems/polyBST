@@ -23,7 +23,7 @@ namespace BST {
     }
 
     template <typename T, typename C>
-    bool BST<T, C>::add(T elem) {
+    bool BST<T, C>::add(const T elem) {
         C comp;
         if (root == nullptr) {
             this->root = new Node(elem);
@@ -47,7 +47,7 @@ namespace BST {
     }
 
     template <typename T, typename C>
-    bool BST<T, C>::contains(T elem) const {
+    bool BST<T, C>::contains(const T elem) const {
         C comp;
         if (root == nullptr) {
             return false;
