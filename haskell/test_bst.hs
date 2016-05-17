@@ -1,3 +1,4 @@
+import Control.Monad
 import BST
 
 verify :: (Eq a, Show a) => a -> a -> IO Bool
@@ -14,14 +15,15 @@ verify a b = if a /= b
 main :: IO()
 main = do
          let a = Empty
-         verify 0 $ size a
-         -- verify [] $ list a
+         _ <- verify 0 $ size a
+         verify 0 $ length $ list a
          let b = add a 5
-         verify 1 $ size b
-         verify True $ contains b 5
-         verify [5] $ list b
-         -- let c = foldr add b [0..10]
-         -- verify 11 $ size c
-         -- verify [0..10] $ list c
-         -- verify False $ contains c 11
+         _ <- verify 1 $ size b
+         _ <- verify True $ contains b 5
+         _ <- verify [5] $ list b
+         let c = foldr (flip add) b [0..10]
+         _ <- verify 11 $ size c
+         _ <- verify [0..10] $ list c
+         _ <- forM [0..10] (\i -> verify True (contains c i))
+         _ <- verify False $ contains c 11
          return ()
