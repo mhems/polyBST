@@ -2,3 +2,4 @@
 *.class
 test
 __pycache__
+*.hi

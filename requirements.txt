@@ -2,3 +2,4 @@ bash
 java>=1.8
 g++>=4.8
 gcc>=4.7
+ghc
