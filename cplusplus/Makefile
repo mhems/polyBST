@@ -2,7 +2,6 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -pedantic -std=c++11
 
 OBJS = \
-	BST.cpp \
 	TestBST.cpp
 
 test : $(OBJS)
