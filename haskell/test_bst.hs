@@ -1,6 +1,12 @@
 import Control.Monad
 import BST
 
+comp :: (Ord a) => a -> a -> Ordering
+comp a b
+  | a < b = LT
+  | a == b = EQ
+  | otherwise = GT
+
 verify :: (Eq a, Show a) => a -> a -> IO Bool
 verify a b = if a /= b
                then do
@@ -14,7 +20,7 @@ verify a b = if a /= b
 
 main :: IO()
 main = do
-         let a = Empty
+         let a = Empty comp
          _ <- verify 0 $ size a
          verify 0 $ length $ list a
          let b = add a 5
