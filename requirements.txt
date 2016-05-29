@@ -1,7 +1,9 @@
 bash
+make
 javac>=1.8
 java>=1.8
 g++>=4.8
 gcc>=4.7
 python>=3
 ghc
+swipl
