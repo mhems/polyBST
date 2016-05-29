@@ -9,20 +9,21 @@ add(empty, E, C, node(E, empty, empty, C)).
 add(node(V1, L1, R1, C), E, C, node(V1, L2, R1, C)) :-
     call(C, E, V1, R),
     R < 0,
-    add(L1, E, L2).
+    add(L1, E, C, L2).
+add(node(V, L, R, C), V, C, node(V, L, R, C)).
 add(node(V1, L1, R1, C), E, C, node(V1, L1, R2, C)) :-
     call(C, E, V1, R),
     R > 0,
-    add(R1, E, R2).
+    add(R1, E, C, R2).
 
 contains(node(V, _, _, _), V).
 contains(node(V, L, _, C), E) :-
-    call(C, E, V, R),
-    R < 0,
+    call(C, E, V, Res),
+    Res < 0,
     contains(L, E).
 contains(node(V, _, R, C), E) :-
-    call(C, E, V, R),
-    R > 0,
+    call(C, E, V, Res),
+    Res > 0,
     contains(R, E).
 
 list(empty, []).
