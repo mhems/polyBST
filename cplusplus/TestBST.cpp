@@ -40,27 +40,28 @@ static bool verify(int expected, size_t actual) {
 }
 
 int main(int, char **) {
+    bool status = true;
     BST::BST<int> b;
     vector<int> exp;
-    verify(0, b.size());
-    verify(exp, b.list());
+    status |= verify(0, b.size());
+    status |= verify(exp, b.list());
     b.add(5);
     exp.push_back(5);
-    verify(true, b.contains(5));
-    verify(1, b.size());
-    verify(exp, b.list());
+    status |= verify(true, b.contains(5));
+    status |= verify(1, b.size());
+    status |= verify(exp, b.list());
     for (int i = 10; i >= 0; --i) {
         b.add(i);
         if (find(exp.cbegin(), exp.cend(), i) == exp.cend()) {
             exp.push_back(i);
         }
     }
-    verify(11, b.size());
+    status |= verify(11, b.size());
     sort(exp.begin(), exp.end());
-    verify(exp, b.list());
+    status |= verify(exp, b.list());
     for (int i = 0; i < 11; ++i) {
-        verify(true, b.contains(i));
+        status |= verify(true, b.contains(i));
     }
-    verify(false, b.contains(11));
-    return 0;
+    status |= verify(false, b.contains(11));
+    return !status;
 }

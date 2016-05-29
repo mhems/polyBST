@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import bst
 
 def verify(expected, actual):
@@ -9,17 +10,19 @@ def verify(expected, actual):
     return True
 
 if __name__ == '__main__':
+    status = True
     b = bst.BST(lambda i, j : i - j)
-    verify(0, len(b));
-    verify([], b.list())
+    status |= verify(0, len(b));
+    status |= verify([], b.list())
     b.add(5)
-    verify(True, 5 in b)
-    verify(1, len(b))
-    verify([5], b.list())
+    status |= verify(True, 5 in b)
+    status |= verify(1, len(b))
+    status |= verify([5], b.list())
     for i in range(10, -1, -1):
         b.add(i)
-    verify(11, len(b))
-    verify(list(range(0, 11)), b.list())
+    status |= verify(11, len(b))
+    status |= verify(list(range(0, 11)), b.list())
     for i in range(0, 11):
-        verify(True, i in b)
-    verify(False, 11 in b)
+        status |= verify(True, i in b)
+    status |= verify(False, 11 in b)
+    sys.exit(not status)

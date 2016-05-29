@@ -22,16 +22,17 @@ public class TestBST {
     }
 
     public static void main(String[] args) {
+        boolean status = true;
         Comparator<Integer> comp = Comparator.comparingInt(i -> i);
         BST<Integer> b = new BST<>(comp);
         List<Integer> exp = new ArrayList<>();
-        verify(0, b.size());
-        verify(Arrays.asList(), b.list());
+        status |= verify(0, b.size());
+        status |= verify(Arrays.asList(), b.list());
         b.add(5);
         exp.add(5);
-        verify(true, b.contains(5));
-        verify(1, b.size());
-        verify(exp, b.list());
+        status |= verify(true, b.contains(5));
+        status |= verify(1, b.size());
+        status |= verify(exp, b.list());
         for (int i = 10; i >= 0; --i) {
             Integer I = new Integer(i);
             b.add(I);
@@ -39,12 +40,13 @@ public class TestBST {
                 exp.add(I);
             }
         }
-        verify(11, b.size());
+        status |= verify(11, b.size());
         exp.sort(comp);
-        verify(exp, b.list());
+        status |= verify(exp, b.list());
         for (int i = 0; i < 11; ++i) {
-            verify(true, b.contains(new Integer(i)));
+            status |= verify(true, b.contains(new Integer(i)));
         }
-        verify(false, b.contains(new Integer(11)));
+        status |= verify(false, b.contains(new Integer(11)));
+        System.exit(status ? 0 : 1);
     }
 }
